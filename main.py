@@ -13,7 +13,7 @@ proj = angr.Project(f'rers/{problemset}/{problem}/{problem}')
 input_len = 8
 
 # We create a bitvector representing stdin
-input_chars = [claripy.BVS('flag_%d' % i, 8) for i in range(input_len)]
+input_chars = [claripy.BVS('inputbyte_%d' % i, 8) for i in range(input_len)]
 sym_input = claripy.Concat( *input_chars )
 
 # Setup the initial state, and point it to the symbolic input
@@ -28,7 +28,7 @@ for k in input_chars:
 # Explore for a few iterations
 # Explore runs until a new state is found that satisfies the "find" condition,
 # e.g. stderr contains the string "error"
-n_iterations = 1
+n_iterations = 50
 
 for i in tqdm(range(n_iterations)):
 
